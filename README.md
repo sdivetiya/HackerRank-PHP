@@ -1,2 +1,2 @@
 # HackerRank-PHP
-HackerRank - Problem Solving Algorithm Solutions 
+HackerRank - Problem Solving Algorithm Solutions PHP
