@@ -12,27 +12,29 @@ Players who have equal scores receive the same ranking number, and the next play
 // Solution
 function climbingLeaderboard($ranked, $player) {
 
-    $ans = [];
-    foreach($player as $p)
-    {
-        $ranked[count($ranked)] = $p;
-        arsort($ranked);
-        $no=1;
-        foreach($ranked as $m)
-        {
-            $status=1;
-            if($m == next($ranked)){
-                $status=0;                
-            }else{
-                $no++;               
+    $result = [];
+    $ranked = array_unique($ranked, SORT_NUMERIC);
+    rsort($ranked);
+    $rank = count($ranked)-1;
+
+    foreach($player as $v){
+        while($rank >= 0){
+            if($rank > count($ranked)-1){
+                $rank = count($ranked)-1;
             }
-            if($m==$p && $status)
-            {
-                array_push($ans, ($no-1));
+            if($v >= $ranked[$rank]){
+                $rank--;
+            } else {
+                $rank = $rank+2;
+                break;
             }
         }
+        if($rank < 0){
+            $rank = 1;
+        }
+        array_push($result, $rank);
     }
-    return $ans;
+    return $result;
 }
 
 $ranked = [100, 100, 50, 40, 40, 20, 10];
